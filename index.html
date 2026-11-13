@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas de l’ingénieur IA</title>
+<link rel="icon" href="data:,">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="atlas.css">
+<script src="engine/cover.js" data-contents></script>
+<link rel="prefetch" href="https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js" crossorigin>
+<link rel="prefetch" href="https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.core.js" crossorigin>
+<style>
+  body { min-height: 100vh; padding: 0 16px 80px; }
+  header { max-width: 1180px; margin: 0 auto; padding: 22px 12px; display: flex; justify-content: space-between; font: 500 12px var(--mono); letter-spacing: .06em; color: var(--muted); text-transform: uppercase; }
+  header b { font: 500 19px var(--serif); letter-spacing: 0; text-transform: none; color: var(--strong); }
+  .hero { text-align: center; margin: 72px auto 64px; max-width: 760px; }
+  .hero h1 { font: 400 clamp(46px, 7vw, 84px)/1 var(--serif); color: var(--strong); letter-spacing: -.015em; }
+  .hero p { font: italic 400 clamp(19px, 2.2vw, 24px)/1.4 var(--serif); color: var(--muted); margin-top: 16px; }
+  .shelf { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr)); gap: 22px; }
+  .section { max-width: 1180px; margin: 56px auto 18px; padding: 0 4px; font: 500 12px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .card { position: relative; background: var(--card); border-radius: 14px; box-shadow: var(--lift); padding: 18px 20px 20px; text-decoration: none; display: flex; flex-direction: column; min-height: 360px; transition: transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s; }
+  @media (hover: hover) { a.card:hover { transform: translateY(-4px) rotate(-.4deg); } }
+  a.card:focus-visible { transform: translateY(-4px) rotate(-.4deg); }
+  .card .no { display: flex; justify-content: space-between; font: 11px var(--mono); color: var(--muted); letter-spacing: .04em; }
+  .card h2 { font: 400 30px/1.05 var(--serif); color: var(--strong); margin-top: 18px; }
+  .card h2 + i { font: italic 400 20px/1.2 var(--serif); color: var(--muted); }
+  .card img { margin-top: auto; width: 100%; aspect-ratio: 9 / 8; object-fit: cover; border-radius: 6px; }
+  .card.soon { box-shadow: none; background: transparent; border: 1px dashed var(--faint); }
+  .card.soon h2 { color: var(--lo); } .card.soon h2 + i { color: var(--faint); }
+  .card .wait { margin-top: auto; font: 11px var(--mono); color: var(--lo); letter-spacing: .06em; text-transform: uppercase; }
+  header span { display: flex; align-items: center; gap: 18px; }
+  .gh { display: flex; color: var(--muted); }
+  .gh:hover { color: var(--strong); }
+  /* phones: each book a row, its picture beside its title, so the shelf can be taken in */
+  @media (max-width: 600px) {
+    body { padding: 0 12px 56px; }
+    header { padding: 18px 4px; }
+    .hero { margin: 36px auto 32px; }
+    .section { margin: 36px auto 12px; }
+    .shelf { gap: 10px; }
+    .card { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 104px; grid-template-rows: auto auto 1fr; column-gap: 14px; padding: 14px 14px 14px 16px; }
+    .card h2 { font-size: 25px; margin-top: 10px; }
+    .card h2 + i { font-size: 17px; }
+    .card img { grid-column: 2; grid-row: 1 / 4; margin: 0; width: 104px; align-self: center; }
+  }
+  .credit { max-width: 1180px; margin: 56px auto 0; font: 12px var(--mono); color: var(--muted); text-align: center; }
+  .credit a { color: var(--hi); }
+  .card .cnt { margin-top: 8px; font: 11px var(--mono); color: var(--red); letter-spacing: .02em; }
+  .legend { max-width: 760px; margin: -36px auto 0; text-align: center; font: 12px/1.6 var(--mono); color: var(--muted); }
+  @media (max-width: 600px) { .card { grid-template-rows: auto auto auto 1fr; } .card .cnt { grid-column: 1; } .card img { grid-row: 1 / 5; } .legend { margin-top: -16px; } }
+</style>
+</head>
+<body>
+  <header><b>Atlas de l’ingénieur IA</b><span><a class="gh" href="../">← l’atlas</a></span></header>
+  <section class="hero">
+    <h1>Devenir ingénieur IA.</h1>
+    <p>30 chapitres, 357 pages : de Python aux systèmes d’IA en production : modèles de langage, RAG, agents, évaluation, inférence, MLOps, sécurité et conception de systèmes, en 23 étapes</p>
+  </section>
+  <h2 class="section">Étape 1 · Les fondations de la programmation</h2>
+  <section class="shelf">
+    <a class="card" href="python/">
+      <div class="no"><span>N° 01</span><span>10 pages</span></div>
+      <h2>Python pour l’ingénieur IA</h2><i>le langage de tout l’écosystème</i>
+      <span class="cnt">Types, fonctions, objets, générateurs, décorateurs, asyncio, typage et paquets</span>
+      <img src="img/python.jpg" alt="Le chemin d’un programme Python, du fichier source à l’exécution">
+    </a>
+    <a class="card" href="outils/">
+      <div class="no"><span>N° 02</span><span>7 pages</span></div>
+      <h2>Les outils du développeur</h2><i>algorithmes, Git, Linux, réseau, API, formats</i>
+      <span class="cnt">Le socle commun à tout ingénieur logiciel, vu sous l’angle de l’IA</span>
+      <img src="img/outils.jpg" alt="Une requête HTTP qui part du client, traverse le réseau et revient en JSON">
+    </a>
+  </section>
+  <h2 class="section">Étape 2 · Mathématiques et bases de l’apprentissage</h2>
+  <section class="shelf">
+    <a class="card" href="maths/">
+      <div class="no"><span>N° 03</span><span>13 pages</span></div>
+      <h2>Les mathématiques de l’IA</h2><i>algèbre linéaire, calcul différentiel, probabilités</i>
+      <span class="cnt">Juste ce qu’il faut de maths pour comprendre ce que font les modèles</span>
+      <img src="img/maths.jpg" alt="Des vecteurs de mots dans un plan, reliés par des flèches">
+    </a>
+    <a class="card" href="mlbases/">
+      <div class="no"><span>N° 04</span><span>10 pages</span></div>
+      <h2>Les bases de l’apprentissage automatique</h2><i>apprendre à partir d’exemples</i>
+      <span class="cnt">Données d’entraînement et de test, surapprentissage, pertes, métriques, réseaux de neurones</span>
+      <img src="img/mlbases.jpg" alt="Deux courbes de perte qui divergent : le surapprentissage">
+    </a>
+  </section>
+  <h2 class="section">Étape 3 · Ingénierie et traitement des données</h2>
+  <section class="shelf">
+    <a class="card" href="donnees/">
+      <div class="no"><span>N° 05</span><span>13 pages</span></div>
+      <h2>Ingénierie et traitement des données</h2><i>NumPy, pandas, SQL, formats, pipelines</i>
+      <span class="cnt">Les données décident de la qualité d’un système d’IA plus que le modèle</span>
+      <img src="img/donnees.jpg" alt="Un pipeline de données, de la collecte au jeu d’entraînement">
+    </a>
+  </section>
+  <h2 class="section">Étape 4 · Apprentissage profond et réseaux de neurones</h2>
+  <section class="shelf">
+    <a class="card" href="reseaux/">
+      <div class="no"><span>N° 06</span><span>12 pages</span></div>
+      <h2>Les réseaux de neurones profonds</h2><i>du perceptron au transformeur</i>
+      <span class="cnt">Perceptrons, couches, pertes, optimiseurs, CNN, RNN, attention, transformeurs, plongements</span>
+      <img src="img/reseaux.jpg" alt="Un réseau de neurones en couches, ses connexions et ses poids">
+    </a>
+  </section>
+  <h2 class="section">Étape 5 · Les frameworks d’apprentissage profond</h2>
+  <section class="shelf">
+    <a class="card" href="pytorch/">
+      <div class="no"><span>N° 07</span><span>8 pages</span></div>
+      <h2>PyTorch</h2><i>le framework de référence</i>
+      <span class="cnt">Tenseurs, autograd, nn.Module, DataLoader, boucles d’entraînement, GPU, points de contrôle</span>
+      <img src="img/pytorch.jpg" alt="La boucle d’entraînement PyTorch">
+    </a>
+    <a class="card" href="ecosysteme/">
+      <div class="no"><span>N° 08</span><span>8 pages</span></div>
+      <h2>TensorFlow, Hugging Face et CUDA</h2><i>l’écosystème autour des modèles</i>
+      <span class="cnt">Keras, la bibliothèque Transformers, les jeux de données, les tokeniseurs, Accelerate et la programmation GPU</span>
+      <img src="img/ecosysteme.jpg" alt="Une puce de GPU et le chemin d’un modèle depuis le Hub">
+    </a>
+  </section>
+  <h2 class="section">Étape 6 · Les fondamentaux des modèles de langage</h2>
+  <section class="shelf">
+    <a class="card" href="llm/">
+      <div class="no"><span>N° 09</span><span>14 pages</span></div>
+      <h2>Comment fonctionne un modèle de langage</h2><i>du texte au jeton suivant</i>
+      <span class="cnt">Transformeur, encodeurs et décodeurs, GPT, BERT, jetons, contexte, positions, attention</span>
+      <img src="img/llm.jpg" alt="La matrice d’attention d’un modèle de langage">
+    </a>
+    <a class="card" href="entrainement/">
+      <div class="no"><span>N° 10</span><span>6 pages</span></div>
+      <h2>Entraîner et aligner un modèle de langage</h2><i>du modèle de base à l’assistant</i>
+      <span class="cnt">Pré-entraînement, lois d’échelle, post-entraînement, instructions, RLHF, DPO, raisonnement</span>
+      <img src="img/entrainement.jpg" alt="Les lois d’échelle et les étapes de l’entraînement">
+    </a>
+  </section>
+  <h2 class="section">Étape 7 · Les API de modèles et l’intégration</h2>
+  <section class="shelf">
+    <a class="card" href="api/">
+      <div class="no"><span>N° 11</span><span>14 pages</span></div>
+      <h2>Appeler des modèles par API</h2><i>OpenAI, Anthropic, Gemini et modèles ouverts</i>
+      <span class="cnt">Authentification, streaming, sorties structurées, outils, multimodal, erreurs, limites, coûts, routage</span>
+      <img src="img/api.jpg" alt="Le trajet d’un appel d’API à un modèle de langage">
+    </a>
+  </section>
+  <h2 class="section">Étape 8 · Prompt et ingénierie du contexte</h2>
+  <section class="shelf">
+    <a class="card" href="prompt/">
+      <div class="no"><span>N° 12</span><span>13 pages</span></div>
+      <h2>Prompt et ingénierie du contexte</h2><i>dire au modèle ce qu’il faut, avec ce qu’il faut</i>
+      <span class="cnt">Instructions, exemples, raisonnement, gabarits, gestion et compression du contexte, versions, injections, évaluation</span>
+      <img src="img/prompt.jpg" alt="Les couches d’un contexte de modèle de langage">
+    </a>
+  </section>
+  <h2 class="section">Étape 9 · Plongements et bases vectorielles</h2>
+  <section class="shelf">
+    <a class="card" href="vecteurs/">
+      <div class="no"><span>N° 13</span><span>17 pages</span></div>
+      <h2>Plongements et bases vectorielles</h2><i>chercher par le sens</i>
+      <span class="cnt">Plongements denses et creux, modèles, similarité, index approchés, Pinecone, Qdrant, Weaviate, Milvus, Chroma, filtres, recherche hybride</span>
+      <img src="img/vecteurs.jpg" alt="Des questions et des documents placés dans un espace de sens">
+    </a>
+  </section>
+  <h2 class="section">Étape 10 · La génération augmentée par récupération (RAG)</h2>
+  <section class="shelf">
+    <a class="card" href="rag/">
+      <div class="no"><span>N° 14</span><span>10 pages</span></div>
+      <h2>Construire un système RAG</h2><i>donner au modèle les bons documents</i>
+      <span class="cnt">Architecture, ingestion, analyse de documents, découpage, chevauchement, plongements, stockage, transformation des requêtes, récupération</span>
+      <img src="img/rag.jpg" alt="Le pipeline d’un système RAG, de l’ingestion à la réponse">
+    </a>
+    <a class="card" href="rag-avance/">
+      <div class="no"><span>N° 15</span><span>10 pages</span></div>
+      <h2>Le RAG avancé</h2><i>améliorer la récupération et mesurer</i>
+      <span class="cnt">Reranking, récupération hybride et contextuelle, parent-enfant, requêtes multiples, Graph RAG, RAG agentique, évaluation, optimisation</span>
+      <img src="img/rag-avance.jpg" alt="Les techniques avancées de RAG">
+    </a>
+  </section>
+  <h2 class="section">Étape 11 · Les agents et les systèmes agentiques</h2>
+  <section class="shelf">
+    <a class="card" href="agents/">
+      <div class="no"><span>N° 16</span><span>9 pages</span></div>
+      <h2>Les agents d’IA</h2><i>des modèles qui agissent</i>
+      <span class="cnt">Architecture, raisonnement et planification, outils, exécution, mémoire, état, orchestration</span>
+      <img src="img/agents.jpg" alt="La boucle de décision d’un agent">
+    </a>
+    <a class="card" href="agentique/">
+      <div class="no"><span>N° 17</span><span>9 pages</span></div>
+      <h2>Les systèmes agentiques</h2><i>plusieurs agents, des humains, de la fiabilité</i>
+      <span class="cnt">Mono-agent et multi-agents, humain dans la boucle, réflexion, boucles plan-exécution, fiabilité, évaluation, sécurité</span>
+      <img src="img/agentique.jpg" alt="Un système à plusieurs agents coordonnés">
+    </a>
+  </section>
+  <h2 class="section">Étape 12 · Frameworks d’IA et orchestration</h2>
+  <section class="shelf">
+    <a class="card" href="frameworks/">
+      <div class="no"><span>N° 18</span><span>12 pages</span></div>
+      <h2>Les frameworks d’IA</h2><i>LangChain, LangGraph, LlamaIndex et les autres</i>
+      <span class="cnt">Haystack, Semantic Kernel, Pydantic AI, DSPy, CrewAI, AutoGen, orchestration, choisir</span>
+      <img src="img/frameworks.jpg" alt="Un graphe d’états LangGraph">
+    </a>
+  </section>
+  <h2 class="section">Étape 13 · Affiner et adapter les modèles</h2>
+  <section class="shelf">
+    <a class="card" href="affinage/">
+      <div class="no"><span>N° 19</span><span>13 pages</span></div>
+      <h2>Affiner et adapter un modèle</h2><i>SFT, LoRA, QLoRA, DPO</i>
+      <span class="cnt">Modèles pré-entraînés, affinage supervisé, PEFT, LoRA, QLoRA, données, données synthétiques, DPO, évaluation, affinage ou RAG</span>
+      <img src="img/affinage.jpg" alt="La mémoire nécessaire selon la méthode d’affinage">
+    </a>
+  </section>
+  <h2 class="section">Étape 14 · L’ingénierie de l’IA multimodale</h2>
+  <section class="shelf">
+    <a class="card" href="multimodal/">
+      <div class="no"><span>N° 20</span><span>12 pages</span></div>
+      <h2>L’IA multimodale</h2><i>images, documents, voix, vidéo</i>
+      <span class="cnt">Modèles vision-langage, OCR, parole, synthèse vocale, audio, vidéo, plongements multimodaux, génération d’images, diffusion, RAG multimodal</span>
+      <img src="img/multimodal.jpg" alt="Une image découpée en patchs pour un transformeur de vision">
+    </a>
+  </section>
+  <h2 class="section">Étape 15 · Évaluer et tester l’IA</h2>
+  <section class="shelf">
+    <a class="card" href="evaluation/">
+      <div class="no"><span>N° 21</span><span>16 pages</span></div>
+      <h2>Évaluer et tester les systèmes d’IA</h2><i>mesurer pour progresser</i>
+      <span class="cnt">Tests, modèles juges, jeux de référence, exactitude, fidélité, pertinence, hallucinations, RAG, agents, humains, régression, en ligne et hors ligne, observabilité</span>
+      <img src="img/evaluation.jpg" alt="Précision, rappel et F1 selon le seuil">
+    </a>
+  </section>
+  <h2 class="section">Étape 16 · Infrastructure et ingénierie de l’inférence</h2>
+  <section class="shelf">
+    <a class="card" href="inference/">
+      <div class="no"><span>N° 22</span><span>10 pages</span></div>
+      <h2>Comprendre l’inférence des modèles de langage</h2><i>ce qui se passe à chaque jeton</i>
+      <span class="cnt">Préremplissage et décodage, cache clé-valeur, batching continu, PagedAttention, décodage spéculatif, quantification, élagage, distillation</span>
+      <img src="img/inference.jpg" alt="Le cache clé-valeur d’un modèle de langage">
+    </a>
+    <a class="card" href="service/">
+      <div class="no"><span>N° 23</span><span>9 pages</span></div>
+      <h2>Servir des modèles en production</h2><i>vLLM, SGLang, Ollama, TensorRT-LLM</i>
+      <span class="cnt">Service de modèles, moteurs d’inférence, mémoire GPU, latence et débit, inférence distribuée</span>
+      <img src="img/service.jpg" alt="Une grappe de GPU pour l’inférence distribuée">
+    </a>
+  </section>
+  <h2 class="section">Étape 17 · Le backend des applications d’IA</h2>
+  <section class="shelf">
+    <a class="card" href="backend/">
+      <div class="no"><span>N° 24</span><span>15 pages</span></div>
+      <h2>Le backend des applications d’IA</h2><i>construire le service autour du modèle</i>
+      <span class="cnt">FastAPI, Flask, REST, WebSockets, asynchrone, Redis, PostgreSQL, tâches de fond, files de messages, authentification, limites, sécurité, microservices, architecture</span>
+      <img src="img/backend.jpg" alt="L’architecture d’une application d’IA">
+    </a>
+  </section>
+  <h2 class="section">Étape 18 · MLOps et LLMOps</h2>
+  <section class="shelf">
+    <a class="card" href="mlops/">
+      <div class="no"><span>N° 25</span><span>15 pages</span></div>
+      <h2>MLOps et LLMOps</h2><i>industrialiser le cycle de vie</i>
+      <span class="cnt">Cycle de vie, suivi d’expériences, MLflow, Weights &amp; Biases, Langfuse, LangSmith, versions de prompts, modèles et données, traces, coûts, surveillance, CI/CD, évaluations automatiques</span>
+      <img src="img/mlops.jpg" alt="Le cycle de vie d’un système d’IA">
+    </a>
+  </section>
+  <h2 class="section">Étape 19 · Cloud et DevOps</h2>
+  <section class="shelf">
+    <a class="card" href="cloud/">
+      <div class="no"><span>N° 26</span><span>16 pages</span></div>
+      <h2>Cloud et DevOps pour l’IA</h2><i>déployer, mettre à l’échelle, automatiser</i>
+      <span class="cnt">AWS (S3, EC2, Lambda, ECS, EKS, SageMaker), Google Cloud et Vertex AI, Azure AI, Docker, Kubernetes, GitHub Actions, CI/CD, Terraform, GPU, mise à l’échelle</span>
+      <img src="img/cloud.jpg" alt="Du code à la production dans le cloud">
+    </a>
+  </section>
+  <h2 class="section">Étape 20 · Sécurité de l’IA et IA responsable</h2>
+  <section class="shelf">
+    <a class="card" href="securite/">
+      <div class="no"><span>N° 27</span><span>14 pages</span></div>
+      <h2>Sécurité de l’IA et IA responsable</h2><i>protéger, respecter, rendre des comptes</i>
+      <span class="cnt">Injection de prompt, jailbreaks, fuites de données, PII, outils, bacs à sable, chaîne d’approvisionnement, attaques adverses, biais, explicabilité, gouvernance, garde-fous</span>
+      <img src="img/securite.jpg" alt="Les défenses en couches autour d’une application d’IA">
+    </a>
+  </section>
+  <h2 class="section">Étape 21 · Conception et architecture des systèmes d’IA</h2>
+  <section class="shelf">
+    <a class="card" href="conception/">
+      <div class="no"><span>N° 28</span><span>15 pages</span></div>
+      <h2>Concevoir des systèmes d’IA</h2><i>architecture, compromis, passage à l’échelle</i>
+      <span class="cnt">Applications évolutives, conception de RAG et d’agents, routage, multi-locataires, caches, stockage, tâches distribuées, tolérance aux pannes, coûts, latence, disponibilité, compromis</span>
+      <img src="img/conception.jpg" alt="L’architecture d’un système d’IA à grande échelle">
+    </a>
+  </section>
+  <h2 class="section">Étape 22 · Construire des projets réels</h2>
+  <section class="shelf">
+    <a class="card" href="projets/">
+      <div class="no"><span>N° 29</span><span>14 pages</span></div>
+      <h2>Construire des projets réels</h2><i>treize projets pour un portfolio</i>
+      <span class="cnt">Assistant de recherche, documents, RAG de production, multi-agents, support, code, multimodal, réunions, entreprise, automatisation, affinage, évaluation, SaaS</span>
+      <img src="img/projets.jpg" alt="La progression des projets du portfolio">
+    </a>
+  </section>
+  <h2 class="section">Étape 23 · Préparer sa carrière</h2>
+  <section class="shelf">
+    <a class="card" href="carriere/">
+      <div class="no"><span>N° 30</span><span>13 pages</span></div>
+      <h2>Préparer sa carrière d’ingénieur IA</h2><i>du portfolio au poste</i>
+      <span class="cnt">Portfolio GitHub, CV, entretiens Python et SQL, fondamentaux ML et LLM, conception de systèmes, RAG et agents, inférence, études de cas, open source, articles, apprendre en public, candidater</span>
+      <img src="img/carriere.jpg" alt="Les étapes vers un poste d’ingénieur IA">
+    </a>
+  </section>
+</body>
+</html>
